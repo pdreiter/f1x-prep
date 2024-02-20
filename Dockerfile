@@ -19,6 +19,7 @@ MAINTAINER mechtaev@gmail.com
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y
+RUN apt-get -y install vim
 
 RUN apt-get install -y build-essential cmake gcovr zlib1g-dev libtinfo-dev python
 RUN apt-get install -y libboost-filesystem-dev libboost-program-options-dev libboost-log-dev
@@ -30,6 +31,7 @@ ADD tests /f1x/tests
 ADD thirdparty /f1x/thirdparty
 ADD tools /f1x/tools
 ADD transform /f1x/transform
+RUN cd /f1x && wget -c http://www.comp.nus.edu.sg/~release/codeflaws/codeflaws.tar.gz
 
 RUN mkdir /f1x/build && cd /f1x/build \
     && cmake .. -DF1X_LLVM=/llvm-3.8.1 \
